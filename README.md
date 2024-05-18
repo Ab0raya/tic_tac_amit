@@ -17,10 +17,7 @@ An engaging and visually appealing XO (Tic-Tac-Toe) game built with Flutter, fea
 - **Win/Draw Detection**: Implements game logic to determine wins, draws, and provide feedback on the game outcome.
 
 ## Screenshots
+![Screenshot_٢٠٢٤٠٥١٨-١٩٠٨٥٠](https://github.com/Ab0raya/tic_tac_amit/assets/104572011/cafbf9b0-101e-484e-9d64-41b5aa534fbd)
 
 *Include screenshots of your game here to showcase the UI and features.*
-
-## Getting Started
-
-### Prerequisites
 
