@@ -18,6 +18,9 @@ An engaging and visually appealing XO (Tic-Tac-Toe) game built with Flutter, fea
 
 ## Screenshots
 ![Screenshot_٢٠٢٤٠٥١٨-١٩٠٨٥٠](https://github.com/Ab0raya/tic_tac_amit/assets/104572011/cafbf9b0-101e-484e-9d64-41b5aa534fbd)
+![Screenshot_٢٠٢٤٠٥١٨-١٩٠٩١٣](https://github.com/Ab0raya/tic_tac_amit/assets/104572011/7212e7a7-b041-40f9-aec8-5202bf8753d1)
+![Screenshot_٢٠٢٤٠٥١٨-١٩٠٩٣٨](https://github.com/Ab0raya/tic_tac_amit/assets/104572011/c7e43a07-c7d7-40ef-80dd-cd355e376804)
+![Screenshot_٢٠٢٤٠٥١٨-١٩٠٩٠١](https://github.com/Ab0raya/tic_tac_amit/assets/104572011/21a66e65-a2c4-4f05-bbdf-1ffee248dced)
 
 *Include screenshots of your game here to showcase the UI and features.*
 
