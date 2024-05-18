@@ -1,16 +1,26 @@
-# tic_tac
+# XO Game
 
-A new Flutter project.
+An engaging and visually appealing XO (Tic-Tac-Toe) game built with Flutter, featuring two difficulty levels and a two-player mode.
+
+## Features
+
+- **Complete XO Game**: A 3x3 grid for classic Tic-Tac-Toe gameplay.
+- **Difficulty Levels**:
+    - **Easy Mode**: The computer opponent makes random moves.
+    - **Hard Mode**: The computer opponent provides a challenging experience.
+- **Two-Player Mode**: Option for two players to play against each other, with player names and turns displayed.
+- **Intuitive UI**: Visually appealing and user-friendly interface displaying the game board, player turns, and game outcomes.
+
+## Game Logic
+
+- **Valid Moves**: Ensures only valid moves are made.
+- **Win/Draw Detection**: Implements game logic to determine wins, draws, and provide feedback on the game outcome.
+
+## Screenshots
+
+*Include screenshots of your game here to showcase the UI and features.*
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+### Prerequisites
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.

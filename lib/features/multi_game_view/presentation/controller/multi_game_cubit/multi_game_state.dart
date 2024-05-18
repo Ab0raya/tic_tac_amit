@@ -1,27 +1,30 @@
-
-part of 'multi_game_cubit.dart';
+import 'package:meta/meta.dart';
 
 @immutable
-abstract class MultiGameState {}
+abstract class MultiGameState {
+  final List<String> board;
+  final bool isXTurn;
 
-class MultiGameInitial extends MultiGameState {}
+  const MultiGameState(this.board, this.isXTurn);
+}
+
+class MultiGameInitial extends MultiGameState {
+  MultiGameInitial() : super(List.generate(9, (index) => ''), true);
+}
 
 class MultiGameUpdated extends MultiGameState {
-  final List<String> board;
-  final String currentPlayer;
-
-  MultiGameUpdated(this.board, this.currentPlayer);
+  const MultiGameUpdated(List<String> board, bool isXTurn)
+      : super(board, isXTurn);
 }
 
 class MultiGameWin extends MultiGameState {
-  final List<String> board;
   final String winner;
 
-  MultiGameWin(this.board, this.winner);
+  const MultiGameWin(List<String> board, bool isXTurn, this.winner)
+      : super(board, isXTurn);
 }
 
 class MultiGameDraw extends MultiGameState {
-  final List<String> board;
-
-  MultiGameDraw(this.board);
+  const MultiGameDraw(List<String> board)
+      : super(board, true);
 }

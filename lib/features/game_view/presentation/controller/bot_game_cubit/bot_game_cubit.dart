@@ -1,7 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'bot_game_state.dart';
 
 class GameCubit extends Cubit<GameState> {
@@ -29,7 +28,9 @@ class GameCubit extends Cubit<GameState> {
     }
 
     _checkWinner();
-    emit(state.copyWith(isXTurn: true));
+    if (!state.isGameOver) {
+      emit(state.copyWith(isXTurn: true));
+    }
   }
 
   void _randomMove() {
@@ -49,6 +50,7 @@ class GameCubit extends Cubit<GameState> {
     final newBoard = List<String>.from(state.board);
     bool moved = false;
 
+    // Try to win
     for (int i = 0; i < newBoard.length; i++) {
       if (newBoard[i] == '') {
         newBoard[i] = 'O';
@@ -61,6 +63,7 @@ class GameCubit extends Cubit<GameState> {
       }
     }
 
+    // Block the player
     if (!moved) {
       for (int i = 0; i < newBoard.length; i++) {
         if (newBoard[i] == '') {
@@ -76,6 +79,7 @@ class GameCubit extends Cubit<GameState> {
       }
     }
 
+    // Random move if no winning or blocking move found
     if (!moved) {
       _randomMove();
     }
@@ -118,12 +122,10 @@ class GameCubit extends Cubit<GameState> {
 
   void resetGame() {
     emit(GameState.initial(state.level));
-
   }
 
   void changeLevel(int newLevel) {
     emit(state.copyWith(level: newLevel));
-    
   }
 
   void resetGameAndCloseDialog(BuildContext dialogContext) {

@@ -7,10 +7,11 @@ import '../../../../../core/utils/styles.dart';
 
 class MultiScoreBoard extends StatelessWidget {
   const MultiScoreBoard(
-      {super.key, required this.player1, required this.player2});
+      {super.key, required this.player1, required this.player2, required this.isXTurn});
 
   final Player player1;
   final Player player2;
+  final bool isXTurn;
 
   @override
   Widget build(BuildContext context) {
@@ -51,10 +52,22 @@ class MultiScoreBoard extends StatelessWidget {
                     )
                   ],
                 ),
-                CircleAvatar(
-                  radius: (screenArea(context) / 250) * 0.02,
-                  backgroundColor: CustomColors.yellow,
-                  backgroundImage: AssetImage(player1.image),
+                Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: isXTurn ? CustomColors.yellow.withOpacity(0.4) : Colors.transparent,
+                        blurRadius: 15,
+                        spreadRadius: 30,
+                      ),
+                    ]
+                  ),
+                  child: CircleAvatar(
+                    radius: (screenArea(context) / 250) * 0.02,
+                    backgroundColor: CustomColors.yellow,
+                    backgroundImage: AssetImage(player1.image),
+                  ),
                 ),
               ],
             ),
@@ -98,10 +111,22 @@ class MultiScoreBoard extends StatelessWidget {
                     ),
                   ],
                 ),
-                CircleAvatar(
-                  radius: (screenArea(context) / 250) * 0.02,
-                  backgroundColor: CustomColors.blue,
-                  backgroundImage: AssetImage(player2.image),
+                Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: !isXTurn ? CustomColors.blue.withOpacity(0.4) : Colors.transparent,
+                          blurRadius: 15,
+                          spreadRadius: 30,
+                        ),
+                      ]
+                  ),
+                  child: CircleAvatar(
+                    radius: (screenArea(context) / 250) * 0.02,
+                    backgroundColor: CustomColors.blue,
+                    backgroundImage: AssetImage(player2.image),
+                  ),
                 ),
               ],
             ),

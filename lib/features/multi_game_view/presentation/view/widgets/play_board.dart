@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../constants/media_query.dart';
 import '../../controller/multi_game_cubit/multi_game_cubit.dart';
+import '../../controller/multi_game_cubit/multi_game_state.dart';
 
 class PlayBoard extends StatelessWidget {
   const PlayBoard({

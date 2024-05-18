@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:tic_tac/core/utils/app_router.dart';
 import 'package:tic_tac/core/utils/assets_paths.dart';
-import 'package:tic_tac/core/utils/colors.dart';
 import 'package:tic_tac/features/game_view/presentation/view/widgets/result_dialog.dart';
 import 'package:tic_tac/features/game_view/presentation/view/widgets/side_tools.dart';
-
 import '../../../../home_view/presentation/views/widgets/background_image.dart';
 import '../../controller/bot_game_cubit/bot_game_cubit.dart';
 import '../../controller/bot_game_cubit/bot_game_state.dart';
@@ -22,31 +18,36 @@ class GameViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => GameCubit(initialLevel),
-      child: Builder(
-          builder: (context) {
-            return BackgroundImage(
-              image: Images.background2,
-              child: SafeArea(
-                child: BlocListener<GameCubit, GameState>(
-                  listener: (context, state) {
-                    if (state.isGameOver) {
-                      showDialog(
-                        context: context,
-                        builder: (dialogContext) => buildAlertDialog(
-                          context,
-                          state,
-                          dialogContext,
-                          state.winner == 'Draw'
-                              ? 'It\'s a Draw!'
-                              : '${state.winner} Wins!',
-                        ),
-                      );
-                    }
-                  },
-                  child: Column(
+      child: Builder(builder: (context) {
+        return BackgroundImage(
+          image: Images.background2,
+          child: SafeArea(
+            child: BlocListener<GameCubit, GameState>(
+              listener: (context, state) {
+                if (state.isGameOver) {
+                  showDialog(
+                    context: context,
+                    builder: (dialogContext) => buildAlertDialog(
+                      context,
+                      state,
+                      dialogContext,
+                      state.winner == 'Draw'
+                          ? 'It\'s a Draw!'
+                          : '${state.winner} Wins!',
+                    ),
+                  );
+                }
+              },
+              child: BlocBuilder<GameCubit, GameState>(
+                builder: (context, state) {
+                  print(state.isXTurn);
+                  print('game');
+                  return Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const BotGameScoreBoard(),
+                      BotGameScoreBoard(
+                        isXTurn: state.isXTurn,
+                      ),
                       const MultiGameBoard(),
                       botSideTools(context),
                       Image.asset(
@@ -55,13 +56,13 @@ class GameViewBody extends StatelessWidget {
                         height: 195,
                       ),
                     ],
-                  ),
-                ),
+                  );
+                },
               ),
-            );
-          }
-      ),
+            ),
+          ),
+        );
+      }),
     );
   }
-
 }

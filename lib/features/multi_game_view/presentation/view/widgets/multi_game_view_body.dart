@@ -8,6 +8,7 @@ import 'package:tic_tac/features/multi_game_view/presentation/view/widgets/side_
 import '../../../../home_view/presentation/views/widgets/background_image.dart';
 import '../../../data/player_model.dart';
 import '../../controller/multi_game_cubit/multi_game_cubit.dart';
+import '../../controller/multi_game_cubit/multi_game_state.dart';
 
 class MultiGameViewBody extends StatelessWidget {
   const MultiGameViewBody({Key? key, required this.player1, required this.player2})
@@ -31,7 +32,8 @@ class MultiGameViewBody extends StatelessWidget {
                         barrierDismissible: false,
                         context: context,
                         builder: (dialogContext) {
-                          return buildAlertDialog(context, state, dialogContext, '${state.winner} Wins!');
+                          return buildAlertDialog(
+                              context, state, dialogContext, '${state.winner} Wins!');
                         },
                       );
                     } else if (state is MultiGameDraw) {
@@ -44,18 +46,26 @@ class MultiGameViewBody extends StatelessWidget {
                       );
                     }
                   },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      MultiScoreBoard(player1: player1, player2: player2),
-                      const PlayBoard(),
-                      multiSideTools(context),
-                      Image.asset(
-                        Images.logo,
-                        width: 195,
-                        height: 195,
-                      ),
-                    ],
+                  child: BlocBuilder<MultiGameCubit, MultiGameState>(
+                    builder: (context, state) {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          MultiScoreBoard(
+                            player1: player1,
+                            player2: player2,
+                            isXTurn: state.isXTurn,
+                          ),
+                          const PlayBoard(),
+                          multiSideTools(context),
+                          Image.asset(
+                            Images.logo,
+                            width: 195,
+                            height: 195,
+                          ),
+                        ],
+                      );
+                    },
                   ),
                 ),
               ),

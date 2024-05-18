@@ -1,30 +1,30 @@
 
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
 
-part 'multi_game_state.dart';
+import 'multi_game_state.dart';
+
 
 class MultiGameCubit extends Cubit<MultiGameState> {
-  List<String> _board = List.generate(9, (index) => '');
-  String _currentPlayer = 'X';
-
   MultiGameCubit() : super(MultiGameInitial());
 
   void handleTap(int index) {
-    if (_board[index].isEmpty) {
-      _board[index] = _currentPlayer;
-      if (_checkWin(_currentPlayer)) {
-        emit(MultiGameWin(_board, _currentPlayer));
-      } else if (_board.every((cell) => cell.isNotEmpty)) {
-        emit(MultiGameDraw(_board));
-      } else {
-        _currentPlayer = _currentPlayer == 'X' ? 'O' : 'X';
-        emit(MultiGameUpdated(_board, _currentPlayer));
+    final currentState = state;
+    if (currentState is MultiGameUpdated || currentState is MultiGameInitial) {
+      if (state.board[index].isEmpty) {
+        final newBoard = List<String>.from(state.board);
+        newBoard[index] = state.isXTurn ? 'X' : 'O';
+        if (_checkWin(newBoard, state.isXTurn ? 'X' : 'O')) {
+          emit(MultiGameWin(newBoard, state.isXTurn, state.isXTurn ? 'X' : 'O'));
+        } else if (newBoard.every((cell) => cell.isNotEmpty)) {
+          emit(MultiGameDraw(newBoard));
+        } else {
+          emit(MultiGameUpdated(newBoard, !state.isXTurn));
+        }
       }
     }
   }
 
-  bool _checkWin(String player) {
+  bool _checkWin(List<String> board, String player) {
     const List<List<int>> winningPositions = [
       [0, 1, 2],
       [3, 4, 5],
@@ -36,7 +36,7 @@ class MultiGameCubit extends Cubit<MultiGameState> {
       [2, 4, 6],
     ];
     for (var positions in winningPositions) {
-      if (positions.every((index) => _board[index] == player)) {
+      if (positions.every((index) => board[index] == player)) {
         return true;
       }
     }
@@ -44,8 +44,6 @@ class MultiGameCubit extends Cubit<MultiGameState> {
   }
 
   void resetGame() {
-    _board = List.generate(9, (index) => '');
-    _currentPlayer = 'X';
-    emit(MultiGameUpdated(_board, _currentPlayer));
+    emit(MultiGameInitial());
   }
 }
