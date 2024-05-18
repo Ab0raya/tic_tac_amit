@@ -118,10 +118,12 @@ class GameCubit extends Cubit<GameState> {
 
   void resetGame() {
     emit(GameState.initial(state.level));
+
   }
 
   void changeLevel(int newLevel) {
     emit(state.copyWith(level: newLevel));
+    
   }
 
   void resetGameAndCloseDialog(BuildContext dialogContext) {
