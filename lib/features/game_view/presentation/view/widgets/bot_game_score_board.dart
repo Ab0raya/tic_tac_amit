@@ -10,13 +10,10 @@ class BotGameScoreBoard extends StatelessWidget {
   final bool isXTurn;
   @override
   Widget build(BuildContext context) {
-    print(isXTurn);
-    print('game score board');
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-         BotGameSign(
-          isXTurn: !isXTurn,
+         const BotGameSign(
           name: 'Bot',
           image: Images.bot,
           letter: 'O',
@@ -28,13 +25,12 @@ class BotGameScoreBoard extends StatelessWidget {
           'vs',
           style: Styles.textStyle29.copyWith(fontSize: 73, color: Colors.white),
         ),
-         BotGameSign(
+         const BotGameSign(
           name: 'you',
           image: Images.player1,
           letter: 'X',
           backgroundColor: CustomColors.blue,
           textColor: CustomColors.yellow,
-          isXTurn: isXTurn,
           shadowColor: CustomColors.yellow,
         ),
       ],

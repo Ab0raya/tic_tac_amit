@@ -40,13 +40,11 @@ class GameViewBody extends StatelessWidget {
               },
               child: BlocBuilder<GameCubit, GameState>(
                 builder: (context, state) {
-                  print(state.isXTurn);
-                  print('game');
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      BotGameScoreBoard(
-                        isXTurn: state.isXTurn,
+                      const BotGameScoreBoard(
+                        isXTurn: false,
                       ),
                       const MultiGameBoard(),
                       botSideTools(context),
